@@ -1,7 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
-import type Usuario from "../../models/Usuario";
+import type Usuario from "../../models/usuario";
 import { cadastrarUsuario } from "../../services/Service";
 import { ToastAlerta } from "../../utils/ToastAlerta";
 
@@ -24,6 +24,7 @@ function Cadastro() {
     if (usuario.id !== 0) {
       retornar();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usuario]);
 
   function retornar() {
@@ -51,13 +52,17 @@ function Cadastro() {
         await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario);
         ToastAlerta("Usuário cadastrado com sucesso!", "sucesso");
         // alert("Usuário cadastrado com sucesso!");
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         ToastAlerta("Erro ao cadastrar usuário!", "erro");
         // alert("Erro ao cadastrar usuário!");
       }
     } else {
       // alert("Dados do usuário inconsistentes! Verifique as informações do cadastro.");
-      ToastAlerta("Dados do usuário inconsistentes! Verifique as informações do cadastro.", "info")
+      ToastAlerta(
+        "Dados do usuário inconsistentes! Verifique as informações do cadastro.",
+        "info"
+      );
       setUsuario({ ...usuario, senha: "" });
       setConfirmarSenha("");
     }
